@@ -1,0 +1,15 @@
+<% if @view_template.present? %>
+  <div class="view-template">
+    <% @view_template.images.each do |image| %>
+      <%= image_tag url_for(image), alt: @view_template.name, class: "template-image" %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @base_template.present? %>
+  <div class="base-templates">
+    <% @base_template.images.each do |image| %>
+      <%= image_tag url_for(image), alt: @base_template.name, class: "template-image" %>
+    <% end %>
+  </div>
+<% end %>

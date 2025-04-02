@@ -1,0 +1,158 @@
+<header class="content-header">
+  <div class="content-header-title">
+    <h1>Dashboard</h1>
+  </div>
+
+  <div class="content-header-toolbars">
+    <div class="btn-toolbar primary-toolbar" role="toolbar">
+      <a href="<%= Rails.application.routes.url_helpers.root_path %>" 
+          target="_blank" class="btn btn-sm btn-primary">
+        <i class="fa fa-eye"></i> View
+      </a>
+    </div>
+  </div>
+
+  <div class="content-header-breadcrumbs">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a data-turbo-frame="_top" href="/admin">Home</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a data-turbo-frame="_top" href="/admin/dashboard">Dashboard</a>
+      </li>
+    </ol>
+  </div>
+</header>
+
+<div class="card">
+  <div class="card-body">
+    <h2 class="text-primary mb-3">
+      Today is <%= @today.strftime("%A, %B %d, %Y") %>
+    </h2>
+
+    <% if flash[:danger].present? %>
+      <div class="alert alert-danger">
+        <%= simple_format(flash[:danger]) %>
+      </div>
+    <% end %>
+
+    <% if @daily_view %>
+      <div class="mb-4">
+        <h4 class="text-secondary">
+          Today's View Template: <strong><%= @daily_view.view_template.name %></strong>
+        </h4>
+        <% if @daily_view.view_template.description.present? %>
+          <p class="text-muted"><%= @daily_view.view_template.description %></p>
+        <% end %>
+      </div>
+
+      <% if @daily_view.view_template.images.attached? %>
+        <div class="image-gallery">
+          <% @daily_view.view_template.images.each do |image| %>
+            <div class="image-container">
+              <%= image_tag Rails.application.routes.url_helpers.rails_blob_path(image.variant(resize_to_limit: [150, 150]).processed, only_path: true), class: "dashboard-image" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted">No images available for this view.</p>
+      <% end %>
+
+      <br>
+
+      <% if @daily_view.base_template %>
+        <div class="mb-4">
+          <h4 class="text-secondary">
+            Today's Base Template: <strong><%= @daily_view.base_template.name %></strong>
+          </h4>
+          <% if @daily_view.base_template.description.present? %>
+            <p class="text-muted"><%= @daily_view.base_template.description %></p>
+          <% end %>
+        </div>
+
+        <% if @daily_view.base_template.images.attached? %>
+          <div class="image-gallery">
+            <% @daily_view.base_template.images.each do |image| %>
+              <div class="image-container">
+                <%= image_tag Rails.application.routes.url_helpers.rails_blob_path(image.variant(resize_to_limit: [150, 150]).processed, only_path: true), class: "dashboard-image" %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted">No images available for this base template.</p>
+        <% end %>
+      <% else %>
+        <p class="text-warning">No base template assigned for today.</p>
+      <% end %>
+
+    <% else %>
+      <p class="text-danger font-weight-bold" style="font-size: 1.5rem; background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px;">
+        No view assigned for today.
+      </p>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .content-header {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  /* Cambiar justify-content a flex-end para alinear a la derecha */
+  .content-header-toolbars {
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+  }
+
+  .content-header-breadcrumbs {
+    margin-top: 10px;
+  }
+
+  .card {
+    margin-top: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn-toolbar {
+    margin-bottom: 10px;
+  }
+
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .image-container {
+    background: #f8f9fa;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-image {
+    max-width: 150px;
+    border-radius: 6px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .dashboard-image:hover {
+    transform: scale(1.1);
+  }
+
+  .alert-danger {
+    margin-top: 20px;
+  }
+</style>
