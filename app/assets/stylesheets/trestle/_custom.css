@@ -6,3 +6,7 @@
  *
  *= require_tree .
 */
+
+body, .trestle-admin {
+  font-family: 'Lato', sans-serif !important;
+}
