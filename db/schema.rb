@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_01_152631) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_02_061024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_01_152631) do
     t.datetime "updated_at", null: false
     t.index ["base_template_id"], name: "index_daily_views_on_base_template_id"
     t.index ["view_template_id"], name: "index_daily_views_on_view_template_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "view_templates", force: :cascade do |t|

@@ -79,6 +79,7 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.3)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     benchmark (0.4.0)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
@@ -295,6 +296,9 @@ GEM
       kaminari (>= 1.1.0)
       railties (>= 6.0.0)
       turbo-rails (>= 2.0.6)
+    trestle-auth (0.5.0)
+      bcrypt (~> 3.1.7)
+      trestle (~> 0.10.0)
     trestle-search (0.5.1)
       trestle (~> 0.10.1)
     turbo-rails (2.0.13)
@@ -343,6 +347,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   trestle
+  trestle-auth
   trestle-search
   tzinfo-data
   web-console

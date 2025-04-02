@@ -63,5 +63,6 @@ gem 'dotenv-rails'
 
 gem 'trestle'
 gem 'trestle-search'
+gem 'trestle-auth'
 
 gem "image_processing"
