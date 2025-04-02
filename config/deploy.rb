@@ -3,7 +3,7 @@ lock "~> 3.19.2"
 
 set :application, "promos"
 set :repo_url, "git@github.com:jbdt/promos.git"
-set :assets_roles, [] # Evita que Capistrano ejecute precompilación de assets
+# set :assets_roles, [] # Evita que Capistrano ejecute precompilación de assets
 
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
