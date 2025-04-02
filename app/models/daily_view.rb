@@ -4,6 +4,7 @@
 #
 #  id               :bigint           not null, primary key
 #  day              :date
+#  views_count      :integer          default(0)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  base_template_id :bigint
@@ -24,4 +25,8 @@ class DailyView < ApplicationRecord
   belongs_to :base_template
 
   validates :day, uniqueness: true, presence: true
+
+  def increment_views_for_today
+    self.increment!(:views_count)
+  end
 end

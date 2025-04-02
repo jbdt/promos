@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 
-  get 'preview/:id', to: 'home#preview', as: 'preview'
+  get 'daily_view_preview/:id', to: 'home#daily_view_preview', as: 'daily_view_preview'
   get 'view_template_preview/:id', to: 'home#view_template_preview', as: 'view_template_preview'
   get 'base_template_preview/:id', to: 'home#base_template_preview', as: 'base_template_preview'
 end

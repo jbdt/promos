@@ -60,8 +60,12 @@ Trestle.resource(:daily_views) do
       "#{base_template_name}<br>#{base_images}".html_safe
     end
 
+    column "Views Count", sort: :views_count, align: :center do |dv|
+      content_tag(:span, dv.views_count, class: "badge badge-danger") # Puedes cambiar "badge-info" por otras clases de Bootstrap como "badge-success", "badge-danger", etc.
+    end
+
     column "Preview", align: :center do |dv|
-      link_to Rails.application.routes.url_helpers.preview_path(dv), target: "_blank", class: "btn btn-primary" do
+      link_to Rails.application.routes.url_helpers.daily_view_preview_path(dv), target: "_blank", class: "btn btn-primary" do
         "<i class='fa fa-eye'></i>".html_safe
       end
     end
@@ -81,6 +85,12 @@ Trestle.resource(:daily_views) do
 
   sort_column(:day) do |collection, order|
     sorted = collection.to_a.sort_by { |dv| dv.day }
+    sorted.reverse! if order == :desc
+    sorted
+  end
+
+  sort_column(:day) do |collection, order|
+    sorted = collection.to_a.sort_by { |dv| dv.views_count }
     sorted.reverse! if order == :desc
     sorted
   end
