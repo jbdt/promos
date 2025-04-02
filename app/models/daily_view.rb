@@ -23,5 +23,5 @@ class DailyView < ApplicationRecord
   belongs_to :view_template
   belongs_to :base_template
 
-  validates :day, presence: true
+  validates :day, uniqueness: true, presence: true
 end
