@@ -38,6 +38,10 @@ Trestle.resource(:daily_views) do
     column :day, sort: :day do |dv|
       dv.day.strftime("%m/%d/%Y")
     end
+    column "Day of the Week", sort: :day_of_the_week,  align: :center do |dv|
+      content_tag(:span, dv.day.strftime("%A"), class: "badge badge-secondary")
+    end
+
     column "View Template", sort: :view_template do |dv|
       template_name = content_tag(:strong, dv.view_template.name)
       images = dv.view_template.images.map do |image|
@@ -77,6 +81,13 @@ Trestle.resource(:daily_views) do
 
   sort_column(:day) do |collection, order|
     sorted = collection.to_a.sort_by { |dv| dv.day }
+    sorted.reverse! if order == :desc
+    sorted
+  end
+
+  sort_column(:day_of_the_week) do |collection, order|
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    sorted = collection.to_a.sort_by { |dv| days_of_week.index(dv.day.strftime("%A")) }
     sorted.reverse! if order == :desc
     sorted
   end
