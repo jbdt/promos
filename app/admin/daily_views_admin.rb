@@ -60,8 +60,8 @@ Trestle.resource(:daily_views) do
       "#{base_template_name}<br>#{base_images}".html_safe
     end
 
-    column "Views Count", sort: :views_count, align: :center do |dv|
-      content_tag(:span, dv.views_count, class: "badge badge-danger") # Puedes cambiar "badge-info" por otras clases de Bootstrap como "badge-success", "badge-danger", etc.
+    column "Views", sort: :views_count, align: :center do |dv|
+      dv.views_count.zero? ? "" : content_tag(:span, dv.views_count, class: "badge badge-danger")
     end
 
     column "Preview", align: :center do |dv|

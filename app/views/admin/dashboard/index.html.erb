@@ -32,14 +32,10 @@
       Today is <%= @today.strftime("%A, %B %d, %Y") %>
     </h2>
 
-    <% if flash[:danger].present? %>
-      <div class="alert alert-danger">
-        <%= simple_format(flash[:danger]) %>
-      </div>
-    <% end %>
-
     <% if @daily_view %>
-      <div class="mb-4">
+        <h5 class="text-muted">
+          Views today: <b><%= @daily_view.views_count %></b>
+        </h5>      <div class="mb-4">
         <h4 class="text-secondary">
           Today's View Template: <strong><%= @daily_view.view_template.name %></strong>
         </h4>
@@ -102,10 +98,9 @@
     border-bottom: 1px solid #dee2e6;
   }
 
-  /* Cambiar justify-content a flex-end para alinear a la derecha */
   .content-header-toolbars {
     display: flex;
-    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    justify-content: flex-end;
   }
 
   .content-header-breadcrumbs {

@@ -6,7 +6,7 @@ Trestle.admin(:dashboard, model: false) do
   controller do
     def index
       @page_title = "Dashboard"
-      
+
       @today = Date.today
       @daily_view = DailyView.find_by(day: @today)
 
@@ -15,7 +15,7 @@ Trestle.admin(:dashboard, model: false) do
         day = @today + i.days
         missing_days << day.strftime("%A, %B %d, %Y") unless DailyView.exists?(day: day)
       end
-  
+
       if missing_days.any?
         flash.now[:danger] = "<b>No daily view assigned for the following days:</b> \n" + missing_days.join("\n")
       end
