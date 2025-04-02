@@ -5,6 +5,8 @@ Trestle.admin(:dashboard, model: false) do
 
   controller do
     def index
+      @page_title = "Dashboard"
+      
       @today = Date.today
       @daily_view = DailyView.find_by(day: @today)
 
