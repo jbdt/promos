@@ -32,7 +32,7 @@ Trestle.resource(:base_templates) do
     end
 
     column "Preview", align: :center do |base_template|
-      link_to Rails.application.routes.url_helpers.view_template_preview_path(id: base_template.id), target: "_blank", class: "btn btn-primary" do
+      link_to Rails.application.routes.url_helpers.base_template_preview_path(id: base_template.id), target: "_blank", class: "btn btn-primary" do
         "<i class='fa fa-eye'></i>".html_safe
       end
     end
